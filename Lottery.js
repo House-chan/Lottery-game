@@ -65,8 +65,11 @@ class lottery extends Phaser.Scene {
             }, this);
         
         //search buttons
-        var search = this.add.image(500, 80);
-        
+        var search = this.add.image(550, 80, 'search');
+        search.setOrigin(0.5);
+        search.setScale(0.25);
+        search.setInteractive();
+       
 
         //money to buy lottery
         this.money = 1000;
@@ -91,6 +94,20 @@ class lottery extends Phaser.Scene {
             }
             
         });
+
+        search.on('pointerdown', () =>{
+            if(printText.text >= 0 && printText.text <= 999 && printText.text.length <= 3){
+                if(printText.text >= 0 && printText.text <= 9 && printText.text.length == 1){
+                    printText.text = '00'+printText.text;    
+                }
+                else if(printText.text >= 0 && printText.text <= 99 && printText.text.length == 2){
+                    printText.text = '0'+printText.text;    
+                }
+                lottery[0].key = printText.text;
+                lottery[0].text.setText(lottery[0].key);
+            }
+        })
+
         // lottery.push({text: "shit"});
         // lottery[0].text = "OH SHIT";
         // console.log(lottery[0]);
